@@ -1,0 +1,69 @@
+---
+# Copyright 2016, JinkIT, and it's Authors.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
+
+- name: bootstrap | install python 2.x
+  raw: DEBIAN_FRONTEND=noninteractive apt-get update && apt-get install -y python-minimal aptitude sshpass
+  when: deploy_python
+
+- set_fact:
+    ansible_python_interpreter: "/usr/bin/python"
+
+- name: get IP info
+  raw: echo `ip route get 8.8.8.8 | awk '{print $NF; exit}' && hostname -f && hostname` > /host
+  register: ip_info
+
+- name: fetch host information
+  fetch:
+    src: /host
+    dest: "{{ loc }}/systems"
+
+- name: build host file
+  local_action: shell cd {{ loc }} ; (/usr/bin/test -f hosts || (/bin/cp hosts.template hosts && find systems -type f -exec cat \{\} \; >> hosts))
+  run_once: true
+
+- name: add auto_master and auto_worker hostname to hosts file
+  local_action: shell sed -i -e '/cfc-1/ s/$/ auto_master/g' {{ loc }}/hosts; sed -i -e '/cfc-2/ s/$/ auto_worker/g' {{ loc }}/hosts
+  run_once: true
+
+- name: push new hosts file to /etc/hosts
+  template: src="{{ loc }}/hosts" dest="/etc/hosts" mode=0644
+
+- name: remove local hosts file
+  local_action: shell cd {{ loc }} ; (/usr/bin/test -f hosts &&  rm hosts)
+  run_once: true
+
+- name: update ssh configuration 
+  template: src="{{ loc }}/config" dest="/root/.ssh/config" mode=0644
+  become: true
+
+- name: restart ssh daemon
+  raw: service sshd restart
+  become: true
+
+# python -c 'import crypt; print crypt.crypt("XdsOeD0MgwCsxFjjGzJhteOdt8ws6j1OD0EqkJ1W", "XdsOeD0MgwCsxFjjGzJhteOdt8ws6j1OD0EqkJ1W")' -> XdtHkYRIrdsaM
+
+- name: create ubuntu user account
+  user: name=ubuntu
+        password=XdtHkYRIrdsaM
+        groups=sudo
+        shell="/bin/bash"
+
+- name: push key
+  authorized_key: user=ubuntu key="{{ lookup('file', '{{ loc }}/ubuntu.key.pub') }}"
+
+- name: upgrade the entire system in preparation for next steps
+  apt: upgrade=full update_cache=yes
+

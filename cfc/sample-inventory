@@ -1,0 +1,11 @@
+[cfc-masters]
+cfc1 ansible_ssh_host=192.168.4.51
+
+[cfc-workers]
+cfc2 ansible_ssh_host=192.168.4.52
+cfc3 ansible_ssh_host=192.168.4.53
+cfc4 ansible_ssh_host=192.168.4.54
+
+[cfc-cluster:children]
+cfc-masters
+cfc-workers

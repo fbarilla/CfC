@@ -1,0 +1,34 @@
+---
+
+- name: download the IBM Spectrum Conductor for Containers installer image.
+  raw: docker pull ibmcom/cfc-installer-ppc64le:0.1.0
+  when: deploy_python
+
+- name: push intallation scripts 
+  template: src={{item.src}} dest={{item.dest}}
+  with_items:
+    - { src: 'templates/cfc_installer.sh', dest: '/home/ubuntu/cfc_installer.sh' }
+    - { src: 'templates/CfC_ppc_master.sh', dest: '/home/ubuntu/CfC_ppc_master.sh' }
+    - { src: 'templates/docker_installer.sh', dest: '/home/ubuntu/docker_installer.sh' }
+    - { src: 'templates/setup_passwordless_ssh', dest: '/home/ubuntu/setup_passwordless_ssh' }
+    - { src: 'templates/ssh_key_auth.sh', dest: '/home/ubuntu/ssh_key_auth.sh' }
+    - { src: 'templates/ssh_key_based_auth.sh', dest: '/home/ubuntu/ssh_key_based_auth.sh' }
+    - { src: 'templates/worker-copy.sh', dest: '/home/ubuntu/worker-copy.sh' }
+    - { src: 'templates/ubuntu.key.pub', dest: '/home/ubuntu/.ssh/ubuntu.key.pub' }
+    - { src: 'templates/ubuntu.key', dest: '/home/ubuntu/.ssh/ubuntu.key'}
+    - { src: 'templates/passwd.txt', dest: '/root/passwd.txt'}
+
+- name: set permissions
+  raw: chmod 777 /home/ubuntu/*
+
+- name: setup password less to auto_master and auto_worker
+  raw: sshpass -f /root/passwd.txt ssh-copy-id ubuntu@auto_master ; sshpass -f /root/passwd.txt ssh-copy-id ubuntu@auto_worker
+
+- name: configure cfc (be patient it can take a while...  ~15 minutes)
+  raw: cd /home/ubuntu ; ./CfC_ppc_master.sh
+  become: true
+
+- name: Congratulations! Conductor for Container (CfC) has been successfully installed. 
+  debug: 
+    msg: "To access CfC point a browser to https://{{ hostvars[inventory_hostname]['ansible_'+public_iface]['ipv4']['address'] }} . Use 'admin/admin' as credentials"
+

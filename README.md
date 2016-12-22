@@ -7,6 +7,13 @@ To intall CfC:
 
 1) Load a Power 8 or OpenPower system with Ubuntu 16.10
 
+    Remove apparmor
+
+	systemctl stop apparmor.service
+	update-rc.d -f apparmor remove
+	apt-get remove apparmor
+	apt-get purge apparmor
+
     Make sure that you have passwordless connection to 'localhost'. The 'ssh root@localhost' should return without asking for password. If not:
 
 	ssh-copy-id root@localhost

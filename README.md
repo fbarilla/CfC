@@ -58,8 +58,8 @@ To intall CfC:
 
 3) Install Vagrant
 
-	apt-get install vagrant-env
-	apt-get install build-essential libssl-dev libffi-dev python-dev
+	apt-get install -y vagrant
+	apt-get install -y build-essential libssl-dev libffi-dev python-dev
 
 4) Install Vagrant plugins
 

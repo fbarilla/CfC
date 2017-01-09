@@ -66,6 +66,10 @@ To intall CfC:
 	vagrant plugin install vagrant-mutate
 	vagrant plugin install vagrant-libvirt
 	vagrant plugin install vagrant-host-shell
+	vagrant plugin install vagrant-env
+	vagrant plugin install vagrant-git
+	vagrant plugin install vagrant-openstack-provider
+	vagrant plugin install vagrant-proxyconf
 
 5) Clone the CfC repository
 

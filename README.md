@@ -13,25 +13,30 @@ To intall CfC:
 	update-rc.d -f apparmor remove
 	apt-get remove apparmor
 	apt-get purge apparmor
-
-    Make sure that you have passwordless connection to 'localhost'. The 'ssh root@localhost' should return without asking for password. If not:
+	
+    Setup 'root' password 
+    Enable ssh login for 'root'
+    	ssh-keygen
+	
+	vi /etc/ssh/sshd_config
+		# PermitRootLogin prohibit-password
+		PermitRootLogin yes
+		# PermitEmptyPasswords no
+		#PasswordAuthentication yes
+	
+	service httpd restart
+	sudo cp /home/ubuntu/.ssh/authorized_keys /root/.ssh/
+	    
+    Make sure that you have passwordless connection to 'localhost'. The 'ssh root@localhost' should 
+    return without asking for password. If not:
 
 	ssh-copy-id root@localhost
 
     Make sure that SMT is turn off
 
-	ppc64_cpu –smt=off
+	ppc64_cpu --smt=off
 
-    Make sure that libvirt can be run by the 'root' user
-
-	vi  /etc/libvirt/qemu.conf
-		user = "root"
-      		group = "root"
-
-	service libvirtd restart
-   
-	
-
+    
 2) Install pre-requisites
 
 	apt-get update
@@ -43,6 +48,14 @@ To intall CfC:
 	apt-get install -y software-properties-common
 	apt-add-repository -y ppa:ansible/ansible
 	apt-get install libvirt-bin
+
+	Make sure that libvirt can be run by the 'root' user
+
+	vi  /etc/libvirt/qemu.conf
+		user = "root"
+		group = "root"
+
+	service libvirtd restart
 
 3) Install Vagrant
 

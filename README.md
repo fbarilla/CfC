@@ -24,9 +24,8 @@ To intall CfC:
 		# PermitEmptyPasswords no
 		#PasswordAuthentication yes
 	
-	service httpd restart
-	sudo cp /home/ubuntu/.ssh/authorized_keys /root/.ssh/
-	    
+	service ssh restart
+		    
     Make sure that you have passwordless connection to 'localhost'. The 'ssh root@localhost' should 
     return without asking for password. If not:
 

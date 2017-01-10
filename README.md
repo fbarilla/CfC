@@ -14,6 +14,9 @@ To intall CfC:
 	apt-get remove apparmor
 	apt-get purge apparmor
 	
+    Install SSH
+    	apt-get install -y openssh-server
+    
     Setup 'root' password 
     Enable ssh login for 'root'
     	ssh-keygen

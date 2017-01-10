@@ -46,7 +46,6 @@ To intall CfC:
 	apt-get -y build-dep vagrant ruby-libvirt
 	apt-get install -y qemu-kvm libvirt-bin  ebtables dnsmasq 
 	apt-get install -y libxslt-dev libxml2-dev libvirt-dev zlib1g-dev ruby-dev git  git-review	
-	apt-get install -y vagrant-libvirt
 	apt-get install -y software-properties-common
 	apt-add-repository -y ppa:ansible/ansible
 	apt-get install -y ansible

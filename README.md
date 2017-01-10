@@ -58,6 +58,10 @@ To intall CfC:
 
 	service libvirtd restart
 
+	If you want to change the network setup
+	
+	vi /etc/libvirt/qemu/networks/default.xml
+
 3) Install Vagrant
 
 	apt-get install -y vagrant

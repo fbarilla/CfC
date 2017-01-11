@@ -41,8 +41,8 @@ To intall CfC:
     
 2) Install pre-requisites
 
-	apt-get update
 	sed -i 's/^# deb-src/deb-src/g' /etc/apt/sources.list
+	apt-get update
 	apt-get -y build-dep vagrant ruby-libvirt
 	apt-get install -y qemu-kvm libvirt-bin  ebtables dnsmasq 
 	apt-get install -y libvirt-daemon-system

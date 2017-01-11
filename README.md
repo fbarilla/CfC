@@ -77,7 +77,7 @@ To intall CfC:
 2a) Check KVM installation
 	One way to check the virtualization layer is to build and launch a VM
 	
-		apt-get install virtinst
+		apt-get install -y virtinst
 		wget http://cdimage.ubuntu.com/ubuntu-server/daily/current/zesty-server-ppc64el.iso
 		virt-install --name=zesty --controller type=scsi,model=virtio-scsi --graphics none \
 		--console pty,target_type=serial --disk path=/var/lib/libvirt/images/zesty.qcow2,size=20 \

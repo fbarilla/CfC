@@ -78,11 +78,11 @@ To intall CfC:
 	One way to check the virtualization layer is to build and launch a VM
 	
 		apt-get install -y virtinst
-		wget http://cdimage.ubuntu.com/ubuntu-server/daily/current/zesty-server-ppc64el.iso
-		virt-install --name=zesty --controller type=scsi,model=virtio-scsi --graphics none \
-		--console pty,target_type=serial --disk path=/var/lib/libvirt/images/zesty.qcow2,size=20 \
+		wget http://cdimage.ubuntu.com/releases/16.10/release/ubuntu-16.10-server-ppc64el.iso
+		virt-install --name=yakkety --controller type=scsi,model=virtio-scsi --graphics none \
+		--console pty,target_type=serial --disk path=/var/lib/libvirt/images/yakkety.qcow2,size=20 \
 		--vcpus=4 --ram=4096 --os-type=linux --os-variant ubuntu16.04 --network bridge=virbr0 \
-		--cdrom=zesty-server-ppc64el.iso
+		--cdrom=ubuntu-16.10-server-ppc64el.iso
 
 3) Install Vagrant
 

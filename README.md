@@ -53,15 +53,26 @@ To intall CfC:
 
 	Make sure that libvirt can be run by the 'root' user
 
-	vi  /etc/libvirt/qemu.conf
-		user = "root"
-		group = "root"
+		vi  /etc/libvirt/qemu.conf
+			user = "root"
+			group = "root"
 
-	service libvirtd restart
+		service libvirtd restart
 
 	If you want to change the network setup
 	
-	vi /etc/libvirt/qemu/networks/default.xml
+		vi /etc/libvirt/qemu/networks/default.xml
+		
+	Check that the KVM kernel modules are loaded
+		
+		lsmod | fgrep kvm
+		modprobe kvm_[hv, pr]   # kvm_pr is used for nested KVM
+		
+	Check the network
+	
+		virsh net-list --all
+		virsh net-start default
+		virsh net-autostart default
 
 3) Install Vagrant
 

@@ -83,7 +83,11 @@ To intall CfC:
 		--console pty,target_type=serial --disk path=/var/lib/libvirt/images/yakkety.qcow2,size=20 \
 		--vcpus=4 --ram=4096 --os-type=linux --os-variant ubuntu16.04 --network bridge=virbr0 \
 		--cdrom=ubuntu-16.10-server-ppc64el.iso
-
+	cleanup
+		virsh pool-destroy images
+		virsh pool-delete images
+		virsh pool-undefine images
+		
 3) Install Vagrant
 
 	apt-get install -y vagrant

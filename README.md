@@ -106,6 +106,7 @@ To intall CfC:
 
 6) Deploy CfC
 
+	cd CfC
 	vagrant up
 
 Note: the CfC dashboard URL and credentials are provided as the last message of the installation process.  

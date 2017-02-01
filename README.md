@@ -43,7 +43,7 @@ To intall CfC:
 
 	sed -i 's/^# deb-src/deb-src/g' /etc/apt/sources.list
 	apt-get update
-	apt-get install -y build-dep vagrant ruby-libvirt
+	apt-get install -y vagrant ruby-libvirt
 	apt-get install -y qemu-kvm libvirt-bin  ebtables dnsmasq 
 	apt-get install -y libvirt-daemon-system
 	apt-get install -y libxslt-dev libxml2-dev libvirt-dev zlib1g-dev ruby-dev git  git-review	

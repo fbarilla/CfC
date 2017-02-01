@@ -21,6 +21,9 @@
 - name: set permissions
   raw: chmod 777 /home/ubuntu/*
 
+- name: create dummy key
+  raw: ssh-keygen -b 2048 -t rsa -f /root/.ssh/id_rsa -q -N ""
+
 - name: setup password less to auto_master and auto_worker
   raw: sshpass -f /root/passwd.txt ssh-copy-id ubuntu@auto_master ; sshpass -f /root/passwd.txt ssh-copy-id ubuntu@auto_worker
 

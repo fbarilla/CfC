@@ -6,7 +6,7 @@ $cfc_vcpus = 2
 $cfc_count = 2
 $git_commit        = "6a7308d"
 $subnet            = "192.168.122"
-$public_iface = "enp0s5"
+$public_iface = "eth1"
 $forwarded_ports   = {}
 $domain_name = "cfc.ibm.com"
 

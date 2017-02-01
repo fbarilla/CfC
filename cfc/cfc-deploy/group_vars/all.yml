@@ -15,8 +15,8 @@
 #
 ## Deployment Options:
 bootstrap_os: ubuntu
-public_iface: enp0s5
-nat_iface: enp0s5
+public_iface: eth1
+nat_iface: eth1
 install_dir: /root/CfC
 
 ## Docker Daemon Options:

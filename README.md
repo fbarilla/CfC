@@ -74,20 +74,6 @@ To intall CfC:
 		virsh net-start default
 		virsh net-autostart default
 
-2a) Check KVM installation
-	One way to check the virtualization layer is to build and launch a VM
-	
-		apt-get install -y virtinst
-		wget http://cdimage.ubuntu.com/releases/16.10/release/ubuntu-16.10-server-ppc64el.iso
-		virt-install --name=yakkety --controller type=scsi,model=virtio-scsi --graphics none \
-		--console pty,target_type=serial --disk path=/var/lib/libvirt/images/yakkety.qcow2,size=20 \
-		--vcpus=4 --ram=4096 --os-type=linux --os-variant ubuntu16.04 --network bridge=virbr0 \
-		--cdrom=ubuntu-16.10-server-ppc64el.iso
-	cleanup
-		virsh pool-destroy images
-		virsh pool-delete images
-		virsh pool-undefine images
-		
 3) Install Vagrant
 
 	apt-get install -y vagrant

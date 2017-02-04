@@ -15,7 +15,7 @@
 #
 ## Deployment Options:
 bootstrap_os: ubuntu
-public_iface: eth1
+public_iface: enp0s5
 nat_iface: eth1
 install_dir: /root/CfC
 

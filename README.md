@@ -110,3 +110,5 @@ Note: the CfC dashboard URL and credentials are provided as the last message of 
 Note: by default, the installation process is started from '/root/CfC'. If the github project has been cloned in a different directory, update the 'install_dir' variable in './cfc/cfc-deploy/group_vars/all.yml'.
 
 Note: by default the VM network interface name is 'eth1'. If your VM has a different interface naming convention, update the name in 'root/CfC/config.rb' and './cfc/cfc-deploy/group_vars/all.yml'
+
+Note: additional info is available at: https://hub.docker.com/r/ibmcom/cfc-installer-ppc64le/?cm_mc_uid=78549162759914854428789&cm_mc_sid_50200000=1486050575

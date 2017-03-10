@@ -88,6 +88,8 @@ To intall CfC:
 	vagrant plugin install vagrant-git
 	vagrant plugin install vagrant-openstack-provider
 	vagrant plugin install vagrant-proxyconf
+	
+	Note: on Ubuntu 16.04 patch the 'vagrant/budler.rb' file using the instructions at: http://stackoverflow.com/questions/36811863/cant-install-vagrant-plugins-in-ubuntu-16-04/36991648#36991648
 
 5) Clone the CfC repository
 

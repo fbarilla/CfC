@@ -9,47 +9,48 @@ To intall CfC:
 
     Remove apparmor
 
-	systemctl stop apparmor.service
-	update-rc.d -f apparmor remove
-	apt-get remove apparmor
-	apt-get purge apparmor
+		systemctl stop apparmor.service
+		update-rc.d -f apparmor remove
+		apt-get remove apparmor
+		apt-get purge apparmor
 	
     Install SSH
-    	apt-get install -y openssh-server
+    
+    		apt-get install -y openssh-server
     
     Setup 'root' password 
     Enable ssh login for 'root'
-    	ssh-keygen
+    
+    		ssh-keygen
 	
-	vi /etc/ssh/sshd_config
-		# PermitRootLogin prohibit-password
-		PermitRootLogin yes
-		# PermitEmptyPasswords no
-		#PasswordAuthentication yes
+		vi /etc/ssh/sshd_config
+			# PermitRootLogin prohibit-password
+			PermitRootLogin yes
+			# PermitEmptyPasswords no
+			#PasswordAuthentication yes
 	
-	service ssh restart
+		service ssh restart
 		    
     Make sure that you have passwordless connection to 'localhost'. The 'ssh root@localhost' should 
     return without asking for password. If not:
 
-	ssh-copy-id root@localhost
+		ssh-copy-id root@localhost
 
     Make sure that SMT is turn off
 
-	ppc64_cpu --smt=off
-
+		ppc64_cpu --smt=off
     
 2) Install pre-requisites
 
-	sed -i 's/^# deb-src/deb-src/g' /etc/apt/sources.list
-	apt-get update
-	apt-get install -y vagrant ruby-libvirt
-	apt-get install -y qemu-kvm libvirt-bin  ebtables dnsmasq 
-	apt-get install -y libvirt-daemon-system
-	apt-get install -y libxslt-dev libxml2-dev libvirt-dev zlib1g-dev ruby-dev git  git-review	
-	apt-get install -y software-properties-common
-	apt-add-repository -y ppa:ansible/ansible
-	apt-get install -y ansible
+		sed -i 's/^# deb-src/deb-src/g' /etc/apt/sources.list
+		apt-get update
+		apt-get install -y vagrant ruby-libvirt
+		apt-get install -y qemu-kvm libvirt-bin  ebtables dnsmasq 
+		apt-get install -y libvirt-daemon-system
+		apt-get install -y libxslt-dev libxml2-dev libvirt-dev zlib1g-dev ruby-dev git  git-review	
+		apt-get install -y software-properties-common
+		apt-add-repository -y ppa:ansible/ansible
+		apt-get install -y ansible
 
 	Make sure that libvirt can be run by the 'root' user
 
@@ -76,30 +77,30 @@ To intall CfC:
 
 3) Install Vagrant
 
-	apt-get install -y vagrant
-	apt-get install -y build-essential libssl-dev libffi-dev python-dev
+		apt-get install -y vagrant
+		apt-get install -y build-essential libssl-dev libffi-dev python-dev
 
 4) Install Vagrant plugins
 
-	vagrant plugin install vagrant-mutate
-	vagrant plugin install vagrant-libvirt
-	vagrant plugin install vagrant-host-shell
-	vagrant plugin install vagrant-env
-	vagrant plugin install vagrant-git
-	vagrant plugin install vagrant-openstack-provider
-	vagrant plugin install vagrant-proxyconf
+		vagrant plugin install vagrant-mutate
+		vagrant plugin install vagrant-libvirt
+		vagrant plugin install vagrant-host-shell
+		vagrant plugin install vagrant-env
+		vagrant plugin install vagrant-git
+		vagrant plugin install vagrant-openstack-provider
+		vagrant plugin install vagrant-proxyconf
 	
 	Note: on Ubuntu 16.04 patch the 'vagrant/budler.rb' file using the instructions at: http://stackoverflow.com/questions/36811863/cant-install-vagrant-plugins-in-ubuntu-16-04/36991648#36991648
 
 5) Clone the CfC repository
 
-	cd /root
-	git clone https://github.com/fbarilla/CfC.git
+		cd /root
+		git clone https://github.com/fbarilla/CfC.git
 
 6) Deploy CfC
 
-	cd CfC
-	vagrant up
+		cd CfC
+		vagrant up
 
 Note: the CfC dashboard URL and credentials are provided as the last message of the installation process.  
 	
